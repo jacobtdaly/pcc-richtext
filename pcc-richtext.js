@@ -6,12 +6,61 @@
 
 	const RichText = window.PCC.RichText;
 
-	// Version (we’ll use this later)
-	RichText.version = '1.0.0';
+	RichText.version = '0.1.1';
 
-	// Simple test function
-	RichText.test = function () {
-		console.log('PCC.RichText loaded - version ' + RichText.version);
+	RichText.defaults = {
+		profile: 'full',
+		height: 300
+	};
+
+	RichText.getFieldIdFromExport = function (exportName) {
+		const container = document.querySelector(`div[data-export="${exportName}"]`);
+
+		if (!container || !container.dataset || !container.dataset.id) {
+			return null;
+		}
+
+		return `form_${container.dataset.id}`;
+	};
+
+	RichText.attachField = function (field) {
+		if (!field || !field.export) {
+			console.warn('PCC.RichText.attachField skipped invalid field config:', field);
+			return;
+		}
+
+		const config = Object.assign({}, RichText.defaults, field);
+		const fieldId = RichText.getFieldIdFromExport(config.export);
+
+		if (!fieldId) {
+			console.warn(`PCC.RichText could not find field for export "${config.export}"`);
+			return;
+		}
+
+		const element = document.getElementById(fieldId);
+
+		if (!element) {
+			console.warn(`PCC.RichText found export "${config.export}" but not textarea "${fieldId}"`);
+			return;
+		}
+
+		console.log('PCC.RichText.attachField ready', {
+			export: config.export,
+			fieldId: fieldId,
+			profile: config.profile,
+			height: config.height
+		});
+	};
+
+	RichText.attachFields = function (fields) {
+		if (!Array.isArray(fields)) {
+			console.warn('PCC.RichText.attachFields expected an array.');
+			return;
+		}
+
+		fields.forEach(function (field) {
+			RichText.attachField(field);
+		});
 	};
 
 })(window, document);
