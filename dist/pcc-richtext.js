@@ -50,41 +50,36 @@
   };
 
   // src/editor.js
-  (function(window2, document2) {
-    "use strict";
-    window2.PCC = window2.PCC || {};
-    window2.PCC.RichText = window2.PCC.RichText || {};
-    const RichText4 = window2.PCC.RichText;
-    RichText4.attachField = function(field) {
-      if (!field || !field.export) {
-        console.warn("PCC.RichText.attachField skipped invalid field config:", field);
-        return;
-      }
-      const fieldId = RichText4.getFieldIdFromExport(field.export);
-      if (!fieldId) {
-        console.warn(`PCC.RichText could not find field for export "${field.export}"`);
-        return;
-      }
-      const element = document2.getElementById(fieldId);
-      if (!element) {
-        console.warn(`PCC.RichText found export "${field.export}" but not textarea "${fieldId}"`);
-        return;
-      }
-      if (window2.CKEDITOR && CKEDITOR.instances && CKEDITOR.instances[fieldId]) {
-        CKEDITOR.remove(CKEDITOR.instances[fieldId]);
-      }
-      CKEDITOR.replace(fieldId, RichText4.getEditorConfig(field));
-    };
-    RichText4.attachFields = function(fields) {
-      if (!Array.isArray(fields)) {
-        console.warn("PCC.RichText.attachFields expected an array.");
-        return;
-      }
-      RichText4.ensureCkeditor(function() {
-        fields.forEach(function(field) {
-          RichText4.attachField(field);
-        });
+  var RichText4 = window.PCC.RichText;
+  RichText4.attachField = function(field) {
+    if (!field || !field.export) {
+      console.warn("PCC.RichText.attachField skipped invalid field config:", field);
+      return;
+    }
+    const fieldId = RichText4.getFieldIdFromExport(field.export);
+    if (!fieldId) {
+      console.warn(`PCC.RichText could not find field for export "${field.export}"`);
+      return;
+    }
+    const element = document.getElementById(fieldId);
+    if (!element) {
+      console.warn(`PCC.RichText found export "${field.export}" but not textarea "${fieldId}"`);
+      return;
+    }
+    if (window.CKEDITOR && CKEDITOR.instances && CKEDITOR.instances[fieldId]) {
+      CKEDITOR.remove(CKEDITOR.instances[fieldId]);
+    }
+    CKEDITOR.replace(fieldId, RichText4.getEditorConfig(field));
+  };
+  RichText4.attachFields = function(fields) {
+    if (!Array.isArray(fields)) {
+      console.warn("PCC.RichText.attachFields expected an array.");
+      return;
+    }
+    RichText4.ensureCkeditor(function() {
+      fields.forEach(function(field) {
+        RichText4.attachField(field);
       });
-    };
-  })(window, document);
+    });
+  };
 })();
