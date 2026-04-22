@@ -11,7 +11,6 @@ RichText.ensureRenderStyles = function () {
 		.generated-content {
 			padding: 4px 8px;
 			min-height: 50px;
-			font-size: 16px;
 		}
 	`;
 
