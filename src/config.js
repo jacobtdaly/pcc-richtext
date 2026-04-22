@@ -1,6 +1,3 @@
-window.PCC = window.PCC || {};
-window.PCC.RichText = window.PCC.RichText || {};
-
 const RichText = window.PCC.RichText;
 
 RichText.version = __VERSION__;
