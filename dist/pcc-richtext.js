@@ -26,27 +26,22 @@
   };
 
   // src/fields.js
-  (function(window2, document2) {
-    "use strict";
-    window2.PCC = window2.PCC || {};
-    window2.PCC.RichText = window2.PCC.RichText || {};
-    const RichText2 = window2.PCC.RichText;
-    RichText2.getFieldIdFromExport = function(exportName) {
-      const container = document2.querySelector(`div[data-export="${exportName}"]`);
-      if (!container || !container.dataset || !container.dataset.id) {
-        return null;
-      }
-      return `form_${container.dataset.id}`;
-    };
-  })(window, document);
+  var RichText2 = window.PCC.RichText;
+  RichText2.getFieldIdFromExport = function(exportName) {
+    const container = document.querySelector(`div[data-export="${exportName}"]`);
+    if (!container || !container.dataset || !container.dataset.id) {
+      return null;
+    }
+    return `form_${container.dataset.id}`;
+  };
 
   // src/loader.js
   (function(window2) {
     "use strict";
     window2.PCC = window2.PCC || {};
     window2.PCC.RichText = window2.PCC.RichText || {};
-    const RichText2 = window2.PCC.RichText;
-    RichText2.ensureCkeditor = function(callback) {
+    const RichText3 = window2.PCC.RichText;
+    RichText3.ensureCkeditor = function(callback) {
       if (window2.CKEDITOR) {
         callback();
         return;
@@ -64,13 +59,13 @@
     "use strict";
     window2.PCC = window2.PCC || {};
     window2.PCC.RichText = window2.PCC.RichText || {};
-    const RichText2 = window2.PCC.RichText;
-    RichText2.attachField = function(field) {
+    const RichText3 = window2.PCC.RichText;
+    RichText3.attachField = function(field) {
       if (!field || !field.export) {
         console.warn("PCC.RichText.attachField skipped invalid field config:", field);
         return;
       }
-      const fieldId = RichText2.getFieldIdFromExport(field.export);
+      const fieldId = RichText3.getFieldIdFromExport(field.export);
       if (!fieldId) {
         console.warn(`PCC.RichText could not find field for export "${field.export}"`);
         return;
@@ -83,16 +78,16 @@
       if (window2.CKEDITOR && CKEDITOR.instances && CKEDITOR.instances[fieldId]) {
         CKEDITOR.remove(CKEDITOR.instances[fieldId]);
       }
-      CKEDITOR.replace(fieldId, RichText2.getEditorConfig(field));
+      CKEDITOR.replace(fieldId, RichText3.getEditorConfig(field));
     };
-    RichText2.attachFields = function(fields) {
+    RichText3.attachFields = function(fields) {
       if (!Array.isArray(fields)) {
         console.warn("PCC.RichText.attachFields expected an array.");
         return;
       }
-      RichText2.ensureCkeditor(function() {
+      RichText3.ensureCkeditor(function() {
         fields.forEach(function(field) {
-          RichText2.attachField(field);
+          RichText3.attachField(field);
         });
       });
     };
