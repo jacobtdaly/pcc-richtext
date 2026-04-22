@@ -1,23 +1,15 @@
-(function (window) {
-	'use strict';
+const RichText = window.PCC.RichText;
 
-	window.PCC = window.PCC || {};
-	window.PCC.RichText = window.PCC.RichText || {};
+RichText.ensureCkeditor = function (callback) {
+	if (window.CKEDITOR) {
+		callback();
+		return;
+	}
 
-	const RichText = window.PCC.RichText;
+	if (window.FW && typeof FW.Require === 'function') {
+		FW.Require('ckeditor.js?v=' + FW.Version, callback);
+		return;
+	}
 
-	RichText.ensureCkeditor = function (callback) {
-		if (window.CKEDITOR) {
-			callback();
-			return;
-		}
-
-		if (window.FW && typeof FW.Require === 'function') {
-			FW.Require('ckeditor.js?v=' + FW.Version, callback);
-			return;
-		}
-
-		console.error('PCC.RichText could not load CKEditor. FW.Require is unavailable.');
-	};
-
-})(window);
+	console.error('PCC.RichText could not load CKEditor. FW.Require is unavailable.');
+};
