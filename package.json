@@ -6,6 +6,6 @@
     "esbuild": "^0.25.0"
   },
   "scripts": {
-    "build": "esbuild src/index.js --bundle --format=iife --outfile=dist/pcc-richtext.js"
+    "build": "esbuild src/index.js --bundle --format=iife --define:__VERSION__='\"'$npm_package_version'\"' --outfile=dist/pcc-richtext.js"
   }
 }
