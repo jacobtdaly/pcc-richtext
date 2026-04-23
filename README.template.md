@@ -241,7 +241,7 @@ Only use with trusted content.
 ## 🔮 Future Enhancements
 
 - Custom "lite" toolbar profile  
-- CKEditor 5 support  
+- CKEditor 5 support _(if Technolutions updates)_
 - autoInit helper  
 - Configurable render styles  
 - Global configuration overrides  
