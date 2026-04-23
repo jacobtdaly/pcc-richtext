@@ -1,5 +1,7 @@
 # PCC RichText
 
+[![GitHub release](https://img.shields.io/github/v/release/postcaptain/pcc-richtext)](https://github.com/postcaptain/pcc-richtext/releases)
+
 A lightweight, reusable library for enhancing Slate (Technolutions) textarea fields with:
 
 - CKEditor WYSIWYG editing
