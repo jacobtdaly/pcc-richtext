@@ -5,7 +5,7 @@
 
   // src/config.js
   var RichText = window.PCC.RichText;
-  RichText.version = "0.2.1";
+  RichText.version = "0.9.0";
   RichText.defaults = {
     profile: "full",
     height: 300,
