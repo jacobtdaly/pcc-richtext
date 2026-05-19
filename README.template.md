@@ -55,6 +55,29 @@ $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@{{VERSION}}/di
 </script>
 ````
 
+### 🔄 Edit + View Together
+
+If the same page can contain both editable fields *and* rendered responses, you can initialize both behaviors together with a single script load.
+
+```javascript
+$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@{{VERSION}}/dist/pcc-richtext.js')
+  .done(function () {
+
+    PCC.RichText.attachFields([
+      { export: 'FORM FIELD 1 EXPORT KEY HERE', height: 300, profile: 'full' },
+      { export: 'FORM FIELD 2 EXPORT KEY HERE', height: 300, profile: 'basic' },
+      { export: 'FORM FIELD 3 EXPORT KEY HERE', height: 300, profile: 'slim' }
+    ]);
+
+    PCC.RichText.renderResponses([
+      { export: 'FORM FIELD 1 EXPORT KEY HERE' },
+      { export: 'FORM FIELD 2 EXPORT KEY HERE' },
+      { export: 'FORM FIELD 3 EXPORT KEY HERE' }
+    ]);
+
+  });
+```
+
 ## 📦 Installation (CDN)
 
 Load the library from jsDelivr using a specific version:
@@ -121,24 +144,68 @@ Profiles allow you to control editor toolbars without exposing CKEditor details 
 
 ### Built-in profiles
 
-````javascript
-profile: 'full'
-profile: 'basic'
-````
+```javascript
+profile: 'full'   // Slate/CKEditor full toolbar
+profile: 'basic'  // Slate/CKEditor basic toolbar
+profile: 'slim'   // PCC RichText minimal toolbar
+```
+
+The `full` and `basic` profiles are pulled from Slate’s CKEditor toolbar configuration. Their exact tools may change if Slate changes its defaults.
+
+By default, Slate currently provides:
+
+- `full`: clipboard tools, links, images, tables, templates, undo/redo, find/replace, formatting cleanup, source/maximize, text styling, lists, indentation, alignment, font controls, and colors
+- `basic`: text styling, links, lists/indentation, remove formatting, and source view
+
+### Slim profile
+
+The `slim` profile is defined directly by PCC RichText for lightweight content entry.
+
+It includes:
+
+- Bold
+- Italic
+- Underline
+- Link / unlink
+- Numbered lists
+- Bulleted lists
 
 ### Internals
 
-````javascript
+```javascript
 RichText.profiles = {
-  full: () => CKEDITOR.getToolbar('full'),
-  basic: () => CKEDITOR.getToolbar('basic')
+  full: function () {
+    return CKEDITOR.getToolbar('full');
+  },
+
+  basic: function () {
+    return CKEDITOR.getToolbar('basic');
+  },
+
+  slim: function () {
+    return [
+      {
+        name: 'basicstyles',
+        items: ['Bold', 'Italic', 'Underline']
+      },
+      {
+        name: 'links',
+        items: ['Link', 'Unlink']
+      },
+      {
+        name: 'paragraph',
+        items: ['NumberedList', 'BulletedList']
+      }
+    ];
+  }
 };
-````
+```
 
 Profiles map to CKEditor toolbars internally. This allows:
 
+- Using Slate’s standard toolbar definitions where appropriate
+- Defining PCC-specific toolbar profiles when needed
 - Changing toolbar behavior centrally
-- Adding new profiles later
 - Supporting future editor upgrades without rewriting page scripts
 
 ---
