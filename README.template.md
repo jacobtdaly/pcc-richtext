@@ -26,9 +26,10 @@ A lightweight, reusable library for enhancing Slate (Technolutions) textarea fie
 
 ### ✏️ Edit Page (WYSIWYG)
 
-Turn a form field into a rich text block. Paste the following into a Custom Script block:
+Turn a form field into a rich text block. Paste the following into the source code of an Instructions block on the form:
 
-```javascript
+```html
+<script>
 $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@{{VERSION}}/dist/pcc-richtext.js')
   .done(function () {
     PCC.RichText.attachFields([
@@ -37,11 +38,12 @@ $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@{{VERSION}}/di
       { export: 'FORM FIELD 3 EXPORT KEY HERE', height: 300, profile: 'basic' }
     ]);
   });
+</script>
   ````
 
 ### 👀 View Page (Render HTML)
 
-When viewing a form (like on a custom tab) that has saved html, turn it back into displayed content. Paste the following into an Instructions block on the form:
+When viewing a form (like on a custom tab) that has saved html, turn it back into displayed content. Paste the following into the source code of an Instructions block on the form:
 
 ```html
 <script>
@@ -57,9 +59,10 @@ $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@{{VERSION}}/di
 
 ### 🔄 Edit + View Together
 
-If the same page can contain both editable fields *and* rendered responses, you can initialize both behaviors together with a single script load.
+If the same page can contain both editable fields *and* rendered responses, you can initialize both behaviors together with a single script load. Paste the following into the source code of an Instructions block on the form:
 
-```javascript
+```html
+<script>
 $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@{{VERSION}}/dist/pcc-richtext.js')
   .done(function () {
 
@@ -76,6 +79,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@{{VERSION}}/di
     ]);
 
   });
+</script>
 ```
 
 ## 📦 Installation (CDN)
