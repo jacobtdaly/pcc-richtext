@@ -29,7 +29,7 @@ A lightweight, reusable library for enhancing Slate (Technolutions) textarea fie
 Turn a form field into a rich text block. Paste the following into a Custom Script block:
 
 ```javascript
-$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@0.9.1/dist/pcc-richtext.js')
+$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@1.0.0/dist/pcc-richtext.js')
   .done(function () {
     PCC.RichText.attachFields([
       { export: 'FORM FIELD 1 EXPORT KEY HERE', height: 300, profile: 'full' },
@@ -45,7 +45,7 @@ When viewing a form (like on a custom tab) that has saved html, turn it back int
 
 ```html
 <script>
-$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@0.9.1/dist/pcc-richtext.js')
+$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@1.0.0/dist/pcc-richtext.js')
   .done(function () {
     PCC.RichText.renderResponses([
       { export: 'FORM FIELD 1 EXPORT KEY HERE' },
@@ -60,7 +60,7 @@ $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@0.9.1/dist/pcc
 If the same page can contain both editable fields *and* rendered responses, you can initialize both behaviors together with a single script load.
 
 ```javascript
-$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@0.9.1/dist/pcc-richtext.js')
+$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@1.0.0/dist/pcc-richtext.js')
   .done(function () {
 
     PCC.RichText.attachFields([
@@ -82,12 +82,12 @@ $.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@0.9.1/dist/pcc
 
 Load the library from jsDelivr using a specific version:
 
-https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@0.9.1/dist/pcc-richtext.js
+https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@1.0.0/dist/pcc-richtext.js
 
 Always use explicit versions, not `@main`.
 
 ```javascript
-$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@0.9.1/dist/pcc-richtext.js');
+$.getScript('https://cdn.jsdelivr.net/gh/postcaptain/pcc-richtext@1.0.0/dist/pcc-richtext.js');
 ````
 ---
 
